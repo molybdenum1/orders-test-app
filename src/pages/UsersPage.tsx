@@ -1,22 +1,28 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
-import { UsersList, Pagination, UsersFilters, UsersViewSwitch, type User } from '../features/users'
-import customers from '../../customers.json'
+import { useState, useRef, useCallback, useEffect } from "react";
+import {
+  UsersList,
+  Pagination,
+  UsersFilters,
+  UsersViewSwitch,
+  type User,
+} from "../features/users";
+import customers from "../../customers.json";
 
 function generateUser(c: User, idx: number): User {
   return {
     id: idx,
-    firstName: c.firstName ?? '',
-    lastName: c.lastName ?? '',
+    firstName: c.firstName ?? "",
+    lastName: c.lastName ?? "",
     email: c.email ?? `user${c.streetNumber}@example.com`,
-    gender: c.gender ?? '',
-    country: c.country ?? '',
-    city: c.city ?? '',
-    state: c.state ?? '',
-    postCode: c.postCode ?? '',
-    street: c.street ?? '',
+    gender: c.gender ?? "",
+    country: c.country ?? "",
+    city: c.city ?? "",
+    state: c.state ?? "",
+    postCode: c.postCode ?? "",
+    street: c.street ?? "",
     streetNumber: c.streetNumber,
     avatar: `https://i.pravatar.cc/48?img=${(idx % 70) + 1}`,
-  }
+  };
 }
 
 export const UsersPage = () => {
@@ -103,7 +109,7 @@ export const UsersPage = () => {
       loadPage(0);
     }
     if (filteredCustomers.length === 0) {
-      setError('No users found matching your filters.');
+      setError("No users found matching your filters.");
     } else {
       setError(null);
     }
@@ -142,7 +148,11 @@ export const UsersPage = () => {
         genderOptions={genderOptions}
         countryOptions={countryOptions}
       />
-      {error && <div style={{ color: 'red', marginBottom: 16, fontWeight: 600 }}>{error}</div>}
+      {error && (
+        <div style={{ color: "red", marginBottom: 16, fontWeight: 600 }}>
+          {error}
+        </div>
+      )}
       <UsersList users={users} view={view} />
       {loading && (
         <div style={{ textAlign: "center", margin: 24 }}>Loading...</div>
