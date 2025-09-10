@@ -42,14 +42,14 @@ const UsersList: React.FC<UsersListProps> = ({ users, view = 'grid' }) => {
             <img src={user.avatar} alt={user.firstName} width={36} height={36} style={{ borderRadius: '50%' }} />
             <div>
               <div style={{ fontWeight: 600 }}>{user.firstName} {user.lastName}</div>
-              <div style={{ color: '#555', fontSize: 14 }}>{user.email}</div>
+              <div style={{ color: '#555', fontSize: 14 }}>{user.email.length > 24 ? user.email.slice(0, 21) + '...' : user.email}</div>
             </div>
           </div>
         ))}
       </div>
     );
   }
-  // grid view
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
       {users.map((user: User) => (
@@ -61,7 +61,7 @@ const UsersList: React.FC<UsersListProps> = ({ users, view = 'grid' }) => {
           <img src={user.avatar} alt={user.firstName} width={48} height={48} style={{ borderRadius: '50%' }} />
           <div>
             <div style={{ fontWeight: 600 }}>{user.firstName} {user.lastName}</div>
-            <div style={{ color: '#555', fontSize: 14 }}>{user.email}</div>
+            <div style={{ color: '#555', fontSize: 14 }}>{user.email.length > 21 ? user.email.slice(0, 18) + '...' : user.email}</div>
           </div>
         </div>
       ))}
