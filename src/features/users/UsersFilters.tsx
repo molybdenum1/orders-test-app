@@ -1,23 +1,21 @@
 import React from "react";
 
+interface Filters {
+  name: string;
+  gender: string;
+  country: string;
+}
+
 interface UsersFiltersProps {
-  filterName: string;
-  setFilterName: (v: string) => void;
-  filterGender: string;
-  setFilterGender: (v: string) => void;
-  filterCountry: string;
-  setFilterCountry: (v: string) => void;
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
   genderOptions: string[];
   countryOptions: string[];
 }
 
 const UsersFilters: React.FC<UsersFiltersProps> = ({
-  filterName,
-  setFilterName,
-  filterGender,
-  setFilterGender,
-  filterCountry,
-  setFilterCountry,
+  filters,
+  setFilters,
   genderOptions,
   countryOptions,
 }) => (
@@ -25,13 +23,13 @@ const UsersFilters: React.FC<UsersFiltersProps> = ({
     <input
       type="text"
       placeholder="Name or Surname"
-      value={filterName}
-      onChange={(e) => setFilterName(e.target.value)}
+      value={filters.name}
+      onChange={(e) => setFilters({ ...filters, name: e.target.value })}
       style={{ padding: "8px", minWidth: 180 }}
     />
     <select
-      value={filterGender}
-      onChange={(e) => setFilterGender(e.target.value)}
+      value={filters.gender}
+      onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
       style={{ padding: "8px", minWidth: 120 }}
     >
       <option value="">Gender</option>
@@ -42,8 +40,8 @@ const UsersFilters: React.FC<UsersFiltersProps> = ({
       ))}
     </select>
     <select
-      value={filterCountry}
-      onChange={(e) => setFilterCountry(e.target.value)}
+      value={filters.country}
+      onChange={(e) => setFilters({ ...filters, country: e.target.value })}
       style={{ padding: "8px", minWidth: 120 }}
     >
       <option value="">Country</option>

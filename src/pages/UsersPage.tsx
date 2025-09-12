@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useIsMobile } from "../shared/hooks/useIsMobile";
 import {
   UsersList,
   Pagination,
@@ -31,7 +32,7 @@ export const UsersPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isMobile = useIsMobile(768);
   const [filterName, setFilterName] = useState("");
   const [filterGender, setFilterGender] = useState("");
   const [filterCountry, setFilterCountry] = useState("");
@@ -58,13 +59,7 @@ export const UsersPage = () => {
 
   const filteredTotalPages = Math.ceil(filteredCustomers.length / pageSize);
 
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth <= 768);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // ...existing code...
 
   const loadMore = useCallback(() => {
     if (loading || !hasMore) return;
@@ -139,12 +134,12 @@ export const UsersPage = () => {
       <h2>Users</h2>
       {!isMobile && <UsersViewSwitch view={view} setView={setView} />}
       <UsersFilters
-        filterName={filterName}
-        setFilterName={setFilterName}
-        filterGender={filterGender}
-        setFilterGender={setFilterGender}
-        filterCountry={filterCountry}
-        setFilterCountry={setFilterCountry}
+        filters={{ name: filterName, gender: filterGender, country: filterCountry }}
+        setFilters={({ name, gender, country }) => {
+          setFilterName(name);
+          setFilterGender(gender);
+          setFilterCountry(country);
+        }}
         genderOptions={genderOptions}
         countryOptions={countryOptions}
       />

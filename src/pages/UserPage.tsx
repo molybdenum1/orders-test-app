@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import customers from "../../customers.json";
 import orders from "../../orders.json";
 import { type User } from "../entities/user/model";
-import { UserProfile } from "../entities/user/UserProfile";
+import { UserProfile } from "../features/users/UserProfile";
 import { OrdersTable } from "../features/orders/OrdersTable";
 import { BackButton } from "../shared/ui/BackButton";
 
